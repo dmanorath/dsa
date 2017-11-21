@@ -2,7 +2,7 @@
 class List {
 private:
 	typedef struct Node {
-		char * data;
+		string data;
 		Node* next;
 	}*node;
 	
@@ -12,8 +12,10 @@ private:
 
 public:
 	List();
-	void addNode(char* addData);
+	void addNode(string addData);
 	// void delNode(char* delData);
+	void queue();
+	void insertionSort(string searchData);
 	void printList();
 };
 

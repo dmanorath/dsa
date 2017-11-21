@@ -10,11 +10,11 @@ List::List() {
 	temp = NULL;
 }
 
-void List::addNode(char *addData) {
+void List::addNode(string addData) {
 	node n = new Node;
+//	Node *n = (Node*)malloc(sizeof(Node));
 	n->next = NULL;
 	n->data = addData;
-
 	if (head != NULL) {
 		curr = head;
 		while (curr->next != NULL) {
@@ -25,7 +25,9 @@ void List::addNode(char *addData) {
 	else {
 		head = n;
 	}
+//	free(n);
 }
+
 void List::printList() {
 	curr = head;
 	while (curr != NULL) {
@@ -34,14 +36,27 @@ void List::printList() {
 	}
 }
 
-int main()
-{
-	//List list;
-	//list.addNode("Hi");
-	//list.addNode("there");
-	//list.printList();
-
-		
+int main(char *argc, char argv[])
+{	
+	List list;
+	string line;
+	ifstream myFile("test.txt");
+	if (myFile.is_open()) {
+		//while (getline(myFile, line)) { // reads line by line
+		//	cout << line << endl;
+		//}
+	//	cout << "Array: ";
+		while (myFile >> line) { // reads each line
+			//cout << line << endl;
+			list.addNode(line);
+		}
+		list.printList();
+		myFile.close();
+	}
+	else {
+		cout << "File is not open!" << endl;
+	}
+	/*
 	char buffer[100];
 	ifstream myfile("test.txt");  
 	if (!myfile.is_open()) {
@@ -49,15 +64,18 @@ int main()
 		exit(1);
 	}		
 	else {
-		//while (!myfile.eof()) {
+
+	//	while (!myfile.eof()) {
 			//string[] words;
-			List list;
+		//	List list;
 			myfile.getline(buffer, 100);
 			string temp = buffer;
 			cout << "Original : " << buffer << endl;
 			
 			short counter = 0;
-			string strWords[20];
+			char *strWords;
+			strWords = "this is text.";
+		//	char *strWord = &strWords[10];
 			cout << "Array: ";
 			for (short i = 0; i<temp.length(); i++) {
 				if (temp[i] == ' ') {
@@ -67,18 +85,19 @@ int main()
 				strWords[counter] += temp[i];
 			}
 			for (short i = 0; i < 20; i++) {
-				//cout << strWords[i];
-				char* wordd = strWords[i].c_str();
-				list.addNode(wordd);
+				//char strWord = strWords[10];
+				cout << strWords[i] << " ";
+			//	char *wordd = &strWords[i];
+				//list.addNode(wordd);
 				//cout << wordd;
 			}
-			cout << strWords;
-			list.printList();
+		//	cout << strWords;
+	//		list.printList();
 			cout << endl;
 	//	}
 	}
 	myfile.close();
-
+	*/
 //	insertNode(item);
 	system("pause");
     return 0;
